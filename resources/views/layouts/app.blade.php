@@ -4,31 +4,57 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="color-scheme" content="dark">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        @if (request()->routeIs('home'))
+            {{-- custom title for home --}}
+            <title>{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}</title>
+            <meta name="og:title" content="{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}">
+        @elseif (trans()->has("lgbt_" . Route::currentRouteName()))
+            {{-- defualt title --}}
+            <title>{{ __("lgbt_" . Route::currentRouteName()) }} | {{ config('app.name', 'Laravel') }}</title>
+            <meta name="og:title" content="{{ __("lgbt_" . Route::currentRouteName()) }} | {{ config('app.name', 'Laravel') }}">
+        @else
+            {{-- fallback title --}}
+            <title>{{ config('app.name', 'Laravel') }}</title>
+            <meta name="og:title" content="{{ config('app.name', 'Laravel') }}">
+        @endif
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        {{-- meta descriptions --}}
+        @if (trans()->has("lgbt_meta_desc_" . Route::currentRouteName()))
+            <meta name="description" content="{{ __("lgbt_meta_desc_" . Route::currentRouteName()) }}">
+            <meta name="og:description" content="{{ __("lgbt_meta_desc_" . Route::currentRouteName()) }}">
+        @endif
 
-        <!-- Scripts -->
+        {{-- meta tags --}}
+        <meta name="og:type" content="website">
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="{{ route('home') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ Vite::asset("resources/img/lgbt_bunny.png") }}">
+
+        {{-- Scripts --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <body>
+        <div class="page_wrap">
+            <header>
+                @include('layouts.navigation')
+            </header>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            {{-- Page Content --}}
+            <main class="{{ request()->routeIs('home') ? 'main_home' : 'main' }}">
+                <aside class="cont_lang">
+                    <ul class="lang_selection">
+                        @if (app()->getLocale() === 'de')
+                            <li lang="de" class="lang_option"><div aria-label='Sprache: Deutsch (aktiv)' class='active'>🇩🇪 DE</div></li>
+                            <li lang="en" class="lang_option"><a href="#" rel="nofollow" aria-label="Change language: English">🇬🇧 EN</a></li>
+                        @else
+                            <li lang="de" class="lang_option"><a href="#" rel="nofollow" aria-label="Change language: English">🇬🇧 EN</a></li>
+                            <li lang="en" class="lang_option"><div aria-label='Language: English (active)' class='active'>🇬🇧 EN</div></li>
+                        @endif
+                    </ul>
+                </aside>
 
-            <!-- Page Content -->
-            <main>
                 {{ $slot }}
             </main>
         </div>
