@@ -1,0 +1,16 @@
+{
+    "lgbt_uni" : "Ansbach University",
+
+    "lgbt_meta_desc_home" : "Welcome to the LGBTQIA+ & friends group! We are a queer student group at Ansbach University.",
+    "lgbt_meta_desc_calendar" : "Feel free to drop by! Here you can find all upcoming meetings of the LGBTQIA+ & friends group.",
+    "lgbt_home" : "Home",
+    "lgbt_calendar" : "Calendar",
+    "lgbt_profile.edit" : "Profile",
+
+    "alt_signet" : "Signet of the LGBTQIA+ & friends group at Ansbach University",
+    "alt_signet_link" : "Signet of the LGBTQIA+ & friends group at Ansbach University, link to homepage",
+    "alt_account_icon" : "Account icon",
+    "alt_user_icon" : "User icon",
+    "alt_email_icon" : "Email icon",
+    "alt_pass_icon" : "Password icon"
+}
