@@ -8,9 +8,17 @@
     "lgbt_profile.edit" : "Profil",
 
     "alt_signet" : "Signet der LGBTQIA+ & friends Gruppe der Hochschule Ansbach",
-    "alt_signet_link" : "Signet der LGBTQIA+ & friends Gruppe der Hochschule Ansbach, Link zur Startseite",
+    "alt_signet_link" : "Signet der LGBTQIA+ & friends Gruppe der Hochschule Ansbach, zur Startseite",
     "alt_account_icon" : "Account-Icon",
     "alt_user_icon" : "Benutzer-Icon",
     "alt_email_icon" : "E-Mail-Icon",
-    "alt_pass_icon" : "Passwort-Icon"
+    "alt_pass_icon" : "Passwort-Icon",
+    "alt_nav_resp_open" : "Navigationsmenü öffnen",
+    "alt_nav_resp_close" : "Navigationsmenü schließen",
+    "alt_nav_resp_profile" : "Profiloptionen",
+
+    "lgbt_logout" : "Logout",
+    "lgbt_login" : "Login",
+    "lgbt_account_button" : "Account-Menü öffnen",
+    "lgbt_account_menu" : "Account-Menü"
 }

@@ -37,26 +37,22 @@
     </head>
     <body>
         <div class="page_wrap">
-            <header>
+            <header class="site_header">
                 @include('layouts.navigation')
             </header>
 
             {{-- Page Content --}}
             <main class="{{ request()->routeIs('home') ? 'main_home' : 'main' }}">
                 <aside class="cont_lang">
-                    <ul class="lang_selection">
-                        @if (app()->getLocale() === 'de')
-                            <li lang="de" class="lang_option"><div aria-label='Sprache: Deutsch (aktiv)' class='active'>🇩🇪 DE</div></li>
-                            <li lang="en" class="lang_option"><a href="#" rel="nofollow" aria-label="Change language: English">🇬🇧 EN</a></li>
-                        @else
-                            <li lang="de" class="lang_option"><a href="#" rel="nofollow" aria-label="Change language: English">🇬🇧 EN</a></li>
-                            <li lang="en" class="lang_option"><div aria-label='Language: English (active)' class='active'>🇬🇧 EN</div></li>
-                        @endif
-                    </ul>
+                    <x-lang-switcher/>
                 </aside>
 
                 {{ $slot }}
             </main>
+
+            <footer>
+                @include('layouts.navigation-footer')
+            </footer>
         </div>
     </body>
 </html>

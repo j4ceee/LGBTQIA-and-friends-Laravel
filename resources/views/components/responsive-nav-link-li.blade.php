@@ -10,7 +10,5 @@
 @endphp
 
 <li>
-    <a href="{{ $href }}" {{ $attributes }}>
-        {{ $slot }}
-    </a>
+    <a href="{{ $href }}" {{ $attributes }}>{{ $slot }}</a>
 </li>
