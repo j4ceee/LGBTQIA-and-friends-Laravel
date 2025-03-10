@@ -17,9 +17,15 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
-        return view('auth.register');
+        $adminExists = User::where('admin', true)->exists();
+
+        if ($adminExists) {
+            return redirect(route('login'));
+        } else {
+            return view('auth.register');
+        }
     }
 
     /**
@@ -35,16 +41,20 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $adminExists = User::where('admin', true)->exists();
+
         $user = User::create([
-            'name' => $request->name,
+            'username' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            // if no admin exists, the first user to register will be the admin
+            'admin' => !$adminExists,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('home', absolute: false));
     }
 }

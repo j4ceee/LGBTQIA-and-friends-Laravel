@@ -17,9 +17,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        // system config
+        'username',
         'email',
         'password',
+        'admin',
+        'display_enabled',
+
+        // profile config
+        'display_name',
+        'avatar',
+        'desc_de',
+        'desc_en'
     ];
 
     /**
@@ -42,6 +51,12 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'admin' => 'boolean',
+            'display_enabled' => 'boolean',
+            'display_name' => 'string',
+            'avatar' => 'string',
+            'desc_de' => 'string',
+            'desc_en' => 'string',
         ];
     }
 }

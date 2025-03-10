@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+
+            // account settings
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('admin')->default(false);
+
+            // profile settings
+            $table->string('display_name')->nullable(); // name to show on homepage
+            $table->string('avatar')->nullable();       // image name e.g. user.jpg
+            $table->string('desc_de')->nullable();      // german description to show on homepage
+            $table->string('desc_en')->nullable();      // english description to show on homepage
+            $table->boolean('display_enabled')->default(false);
+
             $table->rememberToken();
             $table->timestamps();
         });
