@@ -1,8 +1,11 @@
 {{-- Secondary Navigation Menu --}}
 <nav class="nav-bottom navbar">
     <ul class="nav_list">
-        <x-nav-link-li :href="route('home')" :active="false">
+        <x-nav-link-li :href="route('home')" :active="request()->routeIs('home')">
             {{ __('lgbt_home') }}
+        </x-nav-link-li>
+        <x-nav-link-li :href="route('home')" :active="false">
+            {{ __('lgbt_calendar') }}
         </x-nav-link-li>
     </ul>
 </nav>

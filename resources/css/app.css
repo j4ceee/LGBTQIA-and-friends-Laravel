@@ -147,7 +147,7 @@ body {
     display:table;
     font-size: 1.1rem;
     font-family: sans-serif;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 .page_wrap {
     width:100%;
@@ -302,7 +302,7 @@ body,
     transition: 0.2s;
 }
 .navbar a.active {
-    background: var(--alt-blue);
+    background-color: var(--alt-blue);
     color: var(--lgbt-bg);
     /* text-shadow: 0 0 2px;*/
     border-radius: 2rem;
@@ -311,6 +311,18 @@ body,
 .navbar a.active:hover {
     color: var(--lgbt-bg);
     text-shadow: none;
+    transition: 0.2s;
+}
+
+.nav-bottom a.active {
+    color: var(--win-border);
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.nav-bottom a.active:hover {
+    color: var(--lgbt-orange);
+    text-shadow: var(--lgbt-orange) 0 0 1px;
     transition: 0.2s;
 }
 

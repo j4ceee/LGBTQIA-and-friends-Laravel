@@ -1,5 +1,14 @@
-@props(['href'])
+@props(['active', 'href'])
 
-<a href="{{ $href }}" class="w-full h-full inline-block">
+@php
+    $classes = $active ? 'active' : '';
+    $attributes = $attributes->class(['w-full', 'h-full', 'inline-block', $classes]);
+
+    if ($active) {
+        $attributes = $attributes->merge(['aria-current' => 'page']);
+    }
+@endphp
+
+<a href="{{ $href }}" {{ $attributes }}>
     {{ $slot }}
 </a>

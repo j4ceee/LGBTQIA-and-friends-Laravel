@@ -59,6 +59,12 @@
                         <x-responsive-nav-link-li :href="route('home')" :active="false">
                             {{ __('lgbt_calendar') }}
                         </x-responsive-nav-link-li>
+
+                        @auth
+                            <x-responsive-nav-link-li :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                                {{ __('lgbt_profile.edit') }}
+                            </x-responsive-nav-link-li>
+                        @endif
                     </ul>
                 </nav>
 
@@ -73,22 +79,17 @@
 
                     <div class="mt-3 space-y-1 navbar nav-respo">
                         @auth
-                        <x-responsive-nav-link :href="route('profile.edit')">
-                            {{ __('lgbt_profile.edit') }}
-                        </x-responsive-nav-link>
-
-                        {{-- Authentication --}}
+                        {{-- Logout --}}
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-responsive-nav-link :href="route('logout')"
+                            <x-responsive-nav-link :href="route('logout')" :active="false"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('lgbt_logout') }}
                             </x-responsive-nav-link>
                         </form>
                         @else
-                            <x-responsive-nav-link :href="route('login')">
+                            <x-responsive-nav-link :href="route('login')" :active="false">
                                 {{ __('lgbt_login') }}
                             </x-responsive-nav-link>
                         @endif
