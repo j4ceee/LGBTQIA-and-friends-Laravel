@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event_Type;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class EventTypeController extends Controller
@@ -34,7 +34,7 @@ class EventTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event_Type $event_Type)
+    public function show(EventType $event_Type)
     {
         //
     }
@@ -42,7 +42,7 @@ class EventTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event_Type $event_Type)
+    public function edit(EventType $event_Type)
     {
         //
     }
@@ -50,7 +50,7 @@ class EventTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event_Type $event_Type)
+    public function update(Request $request, EventType $event_Type)
     {
         //
     }
@@ -58,7 +58,7 @@ class EventTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event_Type $event_Type)
+    public function destroy(EventType $event_Type)
     {
         //
     }

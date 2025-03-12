@@ -28,8 +28,8 @@ switch ($width) {
         {{ $trigger }}
     </div>
 
-    <dialog x-effect="open ? $el.showModal() : $el.close()"
-            class="absolute z-50 {{ $width }} shadow-lg {{ $alignmentClasses }} dropdown_dialog"
+    <dialog x-effect="open ? $el.show() : $el.close()"
+            class="absolute bg-transparent z-50 {{ $width }} {{ $alignmentClasses }} dropdown_dialog"
             @click="open = false"
             {{ $dialogLabel ? 'aria-label=' . $dialogLabel : '' }}
             tabindex="-1">

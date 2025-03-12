@@ -1,4 +1,5 @@
 {
+    "lgbt_name" : "LGBTQIA+ & friends",
     "lgbt_uni" : "Ansbach University",
 
     "lgbt_meta_desc_home" : "Welcome to the LGBTQIA+ & friends group! We are a queer student group at Ansbach University.",
@@ -20,5 +21,13 @@
     "lgbt_logout" : "Log Out",
     "lgbt_login" : "Log In",
     "lgbt_account_button" : "Open account menu",
-    "lgbt_account_menu" : "Account menu"
+    "lgbt_account_menu" : "Account menu",
+    "lgbt_event_delete" : "Delete Event ",
+    "lgbt_event_edit" : "Edit Event ",
+
+    "lgbt_about_text" : "🌈 Welcome to the LGBTQIA+ & friends group at Ansbach University! 🎉 \nWhether you're part of the community or a supportive friend, we warmly invite you to join us. Since 2018, we've provided a safe space to openly discuss sexual orientation and gender identity, support each other, and have lots of fun together! 🤝 Feel free to come to our next meeting and become part of our group. Let's work together to create a diverse and inclusive campus culture! 💬✨",
+    "lgbt_h_about" : "About us",
+    "lgbt_h_events" : "Events",
+
+    "err_no_events" : "No upcoming events."
 }

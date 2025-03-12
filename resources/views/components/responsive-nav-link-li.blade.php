@@ -2,7 +2,7 @@
 
 @php
     $classes = $active ? 'active' : '';
-    $attributes = $attributes->class(['w-full', 'h-full', 'inline-block', $classes]);
+    $attributes = $attributes->class(['w-full', 'inline-block', $classes]);
 
     if ($active) {
         $attributes = $attributes->merge(['aria-current' => 'page']);

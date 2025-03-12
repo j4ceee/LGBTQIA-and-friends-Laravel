@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event_Location;
+use App\Models\EventLocation;
 use Illuminate\Http\Request;
 
 class EventLocationController extends Controller
@@ -34,7 +34,7 @@ class EventLocationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event_Location $event_Location)
+    public function show(EventLocation $event_Location)
     {
         //
     }
@@ -42,7 +42,7 @@ class EventLocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event_Location $event_Location)
+    public function edit(EventLocation $event_Location)
     {
         //
     }
@@ -50,7 +50,7 @@ class EventLocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event_Location $event_Location)
+    public function update(Request $request, EventLocation $event_Location)
     {
         //
     }
@@ -58,7 +58,7 @@ class EventLocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event_Location $event_Location)
+    public function destroy(EventLocation $event_Location)
     {
         //
     }
