@@ -40,12 +40,12 @@
                 <x-dropdown-link :href="route('logout')"
                                  onclick="event.preventDefault();
                         this.closest('form').submit();">
-                    {{ __('lgbt_logout') }}
+                    {{ __('auth.logout') }}
                 </x-dropdown-link>
             </form>
             @else
                 <x-dropdown-link :href="route('login')">
-                    {{ __('lgbt_login') }}
+                    {{ __('auth.login') }}
                 </x-dropdown-link>
             @endif
         </x-slot>

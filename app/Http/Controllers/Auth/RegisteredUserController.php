@@ -43,6 +43,13 @@ class RegisteredUserController extends Controller
 
         $adminExists = User::where('admin', true)->exists();
 
+        if ($adminExists) {
+            // check if the user sending the request is an admin
+            if (!Auth::check() || !Auth::user()->admin) {
+                return redirect(route('login'));
+            }
+        }
+
         $user = User::create([
             'username' => $request->name,
             'email' => $request->email,

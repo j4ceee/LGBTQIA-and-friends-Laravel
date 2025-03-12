@@ -2,6 +2,7 @@
     "lgbt_name" : "LGBTQIA+ & friends",
     "lgbt_uni" : "Ansbach University",
 
+    "lgbt_meta_desc_def" : "Welcome to the LGBTQIA+ & friends group!",
     "lgbt_meta_desc_home" : "Welcome to the LGBTQIA+ & friends group! We are a queer student group at Ansbach University.",
     "lgbt_meta_desc_calendar" : "Feel free to drop by! Here you can find all upcoming meetings of the LGBTQIA+ & friends group.",
     "lgbt_home" : "Home",
@@ -18,8 +19,6 @@
     "alt_nav_resp_close" : "Close navigation menu",
     "alt_nav_resp_profile" : "Profile options",
 
-    "lgbt_logout" : "Log Out",
-    "lgbt_login" : "Log In",
     "lgbt_account_button" : "Open account menu",
     "lgbt_account_menu" : "Account menu",
     "lgbt_event_delete" : "Delete Event ",

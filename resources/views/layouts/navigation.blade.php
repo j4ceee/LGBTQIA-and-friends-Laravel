@@ -85,12 +85,12 @@
                             <x-responsive-nav-link :href="route('logout')" :active="false"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('lgbt_logout') }}
+                                {{ __('auth.logout') }}
                             </x-responsive-nav-link>
                         </form>
                         @else
                             <x-responsive-nav-link :href="route('login')" :active="false">
-                                {{ __('lgbt_login') }}
+                                {{ __('auth.login') }}
                             </x-responsive-nav-link>
                         @endif
                     </div>

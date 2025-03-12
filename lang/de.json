@@ -2,6 +2,7 @@
     "lgbt_name" : "LGBTQIA+ & friends",
     "lgbt_uni" : "Hochschule Ansbach",
 
+    "lgbt_meta_desc_def" : "Willkommen bei der LGBTQIA+ & friends Gruppe!",
     "lgbt_meta_desc_home" : "Willkommen bei der LGBTQIA+ & friends Gruppe! Wir sind eine queere Studentengruppe der Hochschule Ansbach.",
     "lgbt_meta_desc_calendar" : "Schau gerne vorbei! Hier findest du alle bevorstehenden Treffen der LGBTQIA+ & friends Gruppe.",
     "lgbt_home" : "Home",
@@ -18,8 +19,6 @@
     "alt_nav_resp_close" : "Navigationsmenü schließen",
     "alt_nav_resp_profile" : "Profiloptionen",
 
-    "lgbt_logout" : "Logout",
-    "lgbt_login" : "Login",
     "lgbt_account_button" : "Account-Menü öffnen",
     "lgbt_account_menu" : "Account-Menü",
     "lgbt_event_delete" : "Lösche Treffen ",
