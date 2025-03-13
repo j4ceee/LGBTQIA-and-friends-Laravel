@@ -20,9 +20,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('admin')->default(false);
+            $table->boolean('s_admin')->default(false); // super admin (can't be deleted & only set with db access)
 
             // profile settings
             $table->string('display_name')->nullable(); // name to show on homepage
+            $table->json('pronouns')->nullable();       // pronouns to show on homepage
             $table->string('avatar')->nullable();       // image name e.g. user.jpg
             $table->string('desc_de')->nullable();      // german description to show on homepage
             $table->string('desc_en')->nullable();      // english description to show on homepage

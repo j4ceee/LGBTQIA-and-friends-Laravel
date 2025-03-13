@@ -55,10 +55,15 @@ Storage directories:
 - Controllers - `app/Http/Controllers/[MODELNAME]Controller.php`
 - Views - `resources/views/[MODELNAME]/[VIEWNAME].blade.php`
 
-### Show all routes ###
+### Routes ###
 
 To show all routes, run:\
 `php artisan route:list`.
+
+### Link Storage to /public ###
+
+To show all routes, run:\
+`php artisan storage:link`.
 
 ## Update Dependencies ##
 

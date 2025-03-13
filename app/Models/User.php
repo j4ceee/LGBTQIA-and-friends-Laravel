@@ -21,14 +21,6 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'admin',
-        'display_enabled',
-
-        // profile config
-        'display_name',
-        'avatar',
-        'desc_de',
-        'desc_en'
     ];
 
     /**
@@ -52,8 +44,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'admin' => 'boolean',
+            's_admin' => 'boolean',
             'display_enabled' => 'boolean',
             'display_name' => 'string',
+            'pronouns' => 'array',
             'avatar' => 'string',
             'desc_de' => 'string',
             'desc_en' => 'string',

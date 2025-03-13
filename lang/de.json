@@ -18,6 +18,7 @@
     "alt_nav_resp_open" : "Navigationsmenü öffnen",
     "alt_nav_resp_close" : "Navigationsmenü schließen",
     "alt_nav_resp_profile" : "Profiloptionen",
+    "alt_team_avatar" : "Profilbild von ",
 
     "lgbt_account_button" : "Account-Menü öffnen",
     "lgbt_account_menu" : "Account-Menü",
@@ -27,6 +28,8 @@
     "lgbt_about_text" : "🌈 Willkommen bei der LGBTQIA+ & friends Gruppe der Hochschule Ansbach! 🎉 \nEgal, ob du Teil der Community bist oder eine unterstützende / befreundete Person, wir laden dich herzlich ein, dich uns anzuschließen. Seit 2018 bieten wir einen sicheren Raum, um über sexuelle Orientierung und geschlechtliche Identität offen zu sprechen, uns gegenseitig zu unterstützen und gemeinsam viel Spaß zu haben! 🤝 Komme gerne zu unserem nächsten Treffen und werde Teil unserer Gruppe. Lass uns gemeinsam für eine vielfältige und inklusive Campus-Kultur sorgen! 💬✨",
     "lgbt_h_about" : "Über uns",
     "lgbt_h_events" : "Treffen",
+    "lgbt_h_team" : "Unser Team",
+    "lgbt_h_socials" : "Socials & Kontakt",
 
-    "err_no_events" : "Keine bevorstehenden Treffen."
+    "err_no_events" : "Keine anstehenden Treffen."
 }

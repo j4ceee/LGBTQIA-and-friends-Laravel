@@ -18,6 +18,7 @@
     "alt_nav_resp_open" : "Open navigation menu",
     "alt_nav_resp_close" : "Close navigation menu",
     "alt_nav_resp_profile" : "Profile options",
+    "alt_team_avatar" : "Profile picture of ",
 
     "lgbt_account_button" : "Open account menu",
     "lgbt_account_menu" : "Account menu",
@@ -27,6 +28,8 @@
     "lgbt_about_text" : "🌈 Welcome to the LGBTQIA+ & friends group at Ansbach University! 🎉 \nWhether you're part of the community or a supportive friend, we warmly invite you to join us. Since 2018, we've provided a safe space to openly discuss sexual orientation and gender identity, support each other, and have lots of fun together! 🤝 Feel free to come to our next meeting and become part of our group. Let's work together to create a diverse and inclusive campus culture! 💬✨",
     "lgbt_h_about" : "About us",
     "lgbt_h_events" : "Events",
+    "lgbt_h_team" : "Our Team",
+    "lgbt_h_socials" : "Socials & Contact",
 
     "err_no_events" : "No upcoming events."
 }

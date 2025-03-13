@@ -29,5 +29,6 @@ $event_count = count($events);
         </ul>
         @endif
     </div>
-
+    {{-- TODO: notice that registration is required via socials / email to attend events --}}
+    {{-- TODO: calendar import options --}}
 </section>

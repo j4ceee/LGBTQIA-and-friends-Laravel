@@ -3,13 +3,30 @@
 return[
     "save" => "Speichern",
     "saved" => "Gespeichert",
+    "no_changes" => "Keine Änderungen vorgenommen",
     "cancel" => "Abbrechen",
     "delete_account" => "Account löschen",
+
+    "display_name" => "Anzeigename",
+    "pronouns" => "Pronomen",
+    "bio_de" => "Deutsche Bio",
+    "bio_en" => "Englische Bio",
+    "avatar" => "Profilbild",
+    "avatar_d" => "Format: JPG / WEBP, max. 1024kb, 1:1 Verhältnis, max. 1024x1024px",
+
+    "pronouns_l" => [ // changes made here must be reflected in the ProfileController
+        "all" => "alle Pronomen",
+        "f" => "sie/ihr",
+        "m" => "er/ihn",
+        "d" => "they/them",
+        "o" => "andere",
+    ],
 
     "sections" => [
         "account_h" => "Account-Informationen",
         "account_d" => "Aktualisiere deinen Benutzernamen und E-Mail-Adresse. Nur für dich und Admins sichtbar.",
         "profile_h" => "Profil-Information",
+        "profile_d" => "Aktualisiere dein Profilbild, deinen Namen und deine Kurzbeschreibung. Sichtbar auf der Homepage.",
         "password_h" => "Passwort ändern",
         "password_d" => "Stelle sicher, dass dein Account ein langes, zufälliges Passwort verwendet, um sicher zu bleiben.",
         "delete_h" => "Account löschen",

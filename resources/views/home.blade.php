@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="page_content">
+    <div class="page_content home_slide_2">
         <section class="about">
             <div class="section_header">
                 <h2 class="section_heading">{{__('lgbt_h_about')}}</h2>
@@ -34,6 +34,26 @@
         </section>
 
         @include('calendar.cal-calendar', ['events' => $events, 'style' => 'test'])
+    </div>
+
+    <div class="home_slide_3">
+        <section class="page_content team">
+            <div class="section_header">
+                <h2 class="section_heading">{{__('lgbt_h_team')}}</h2>
+                <div class="section_header_underline"></div>
+            </div>
+
+            <div class="staff_presentation">
+                @foreach($team as $member)
+                    <x-team-card :member="$member" />
+                @endforeach
+            </div>
+
+        </section>
+    </div>
+
+    <div class="page_content">
+        <x-socials></x-socials>
     </div>
 
 </x-app-layout>

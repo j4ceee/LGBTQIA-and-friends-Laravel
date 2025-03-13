@@ -4,18 +4,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="color-scheme" content="dark">
 
-    @if (request()->routeIs('home'))
-        {{-- custom title for home --}}
-        <title>{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}</title>
-        <meta name="og:title" content="{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}">
-    @elseif (trans()->has("lgbt_" . Route::currentRouteName()))
+    @if (trans()->has("lgbt_" . Route::currentRouteName()) && !request()->routeIs('home'))
         {{-- default title --}}
         <title>{{ __("lgbt_" . Route::currentRouteName()) }} | {{ config('app.name', 'Laravel') }}</title>
         <meta name="og:title" content="{{ __("lgbt_" . Route::currentRouteName()) }} | {{ config('app.name', 'Laravel') }}">
     @else
-        {{-- fallback title --}}
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        <meta name="og:title" content="{{ config('app.name', 'Laravel') }}">
+        {{-- fallback title & title for home --}}
+        <title>{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}</title>
+        <meta name="og:title" content="{{ config('app.name', 'Laravel') }} | {{ __('lgbt_uni') }}">
     @endif
 
     {{-- meta descriptions --}}
