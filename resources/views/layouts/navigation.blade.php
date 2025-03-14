@@ -37,7 +37,7 @@
             <div class="cont_logo_nav">
 
                 {{-- Logo --}}
-                <x-application-logo class="logo" alt="{{ __('alt_signet') }}" />
+                <x-application-logo class="logo" label="{{ __('alt_signet') }}" />
 
                 {{-- Hamburger --}}
                 <div class="-me-2 flex items-center sm:hidden">

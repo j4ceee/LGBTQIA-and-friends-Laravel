@@ -1,18 +1,6 @@
-@vite(['resources/js/animated_bg.js', 'resources/js/view_calendar.js'])
-
 <x-app-layout>
-    {{--
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Home') }}
-        </h2>
-    </x-slot>
-    --}}
-
-    <div id="canvas_light" style="position: fixed; top: 50%; left: 50%; width: 0; height: 0; transform: translateZ(0); filter: blur(2rem)"></div>
-
     <div class="welcome_slide">
-        <canvas id="canvas" class="canvas_anim"></canvas>
+        <canvas id="canvas" class="canvas_anim" aria-hidden="true"></canvas>
         <div class="welcome_slide_content">
             <h1 class="heading_start"><span class="heading_top">{{ __('lgbt_name') }}</span>
                 <span class="heading_btm">{{ __('lgbt_uni') }}</span></h1>
@@ -56,4 +44,5 @@
         <x-socials></x-socials>
     </div>
 
+    @vite(['resources/js/animated_bg.js', 'resources/js/view_calendar.js'])
 </x-app-layout>

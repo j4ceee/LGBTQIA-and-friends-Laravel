@@ -321,6 +321,7 @@ body,
 
     .nav_hamburger {
         background-color: var(--win-selected);
+        color: var(--lgbt-text);
     }
 
     .nav_hamburger:hover,
@@ -517,7 +518,8 @@ footer {
 }
 
 .nav-bottom a.active {
-    color: var(--win-border);
+    color: var(--light-grey-text);
+    font-weight: bold;
     background-color: transparent;
     border-radius: 0;
 }
@@ -852,6 +854,12 @@ footer {
         blur(clamp(.7rem, 2vh, 2vh))
         saturate(90%)
         brightness(90%);
+}
+
+@media screen and (max-width: 639px) {
+    .canvas_anim {
+        transform: translateZ(0) scale(115%);
+    }
 }
 
 .page_content {
@@ -1447,7 +1455,7 @@ footer {
 
 @property --angle2 {
     syntax: "<angle>";
-    initial-value: 0deg;
+    initial-value: 230deg;
     inherits: false;
 }
 
@@ -1458,17 +1466,25 @@ footer {
     background-image: conic-gradient(from var(--angle2), var(--contrast3), var(--contrast), var(--contrast2), var(--contrast), var(--contrast), var(--contrast3));
     padding-top: 15vh;
     padding-bottom: min(15vh, 10rem);
-    animation: gradient2 60s linear infinite;
+    animation: none;
 }
 
-@keyframes gradient2 {
-    from {
-        --angle2: 305deg;
+@media screen and (min-width: 640px) {
+    .team {
+        animation: gradient2 60s linear infinite;
     }
-    to {
-        --angle2: -45deg;
+
+    @keyframes gradient2 {
+        from {
+            --angle2: 230deg;
+        }
+        to {
+            --angle2: -130deg;
+        }
     }
 }
+
+
 
 .team::after {
     position: absolute;

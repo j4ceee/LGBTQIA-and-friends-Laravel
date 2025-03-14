@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -96,8 +97,9 @@ class ProfileController extends Controller
             $path = 'img/users/';
 
             // Delete old avatar if exists
-            if ($user->avatar && file_exists(public_path($path . $user->avatar))) {
-                unlink(public_path($path . $user->avatar));
+            if ($user->avatar && Storage::disk('public')->exists($path.$user->avatar)) {
+                Storage::disk('public')->delete($path.$user->avatar);
+                $user->avatar = null;
             }
 
             // Store the new avatar

@@ -9,6 +9,7 @@ return[
 
     "display_name" => "Display Name",
     "pronouns" => "Pronouns",
+    "bio" => "Bio",
     "bio_de" => "German Bio",
     "bio_en" => "English Bio",
     "avatar" => "Profile Picture",

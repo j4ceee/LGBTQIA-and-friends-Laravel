@@ -55,9 +55,11 @@ class RegisteredUserController extends Controller
             'username' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // if no admin exists, the first user to register will be the admin
-            'admin' => !$adminExists,
         ]);
+
+        // if no admin exists, the first user to register will be the admin
+        $user->admin = !$adminExists;
+        $user->save();
 
         event(new Registered($user));
 

@@ -8,88 +8,46 @@ const paths = {
         shape: 4, // affects the wave pattern/length (lower = more peaks and valleys)
         amplitude: 40, // Maximum height of the wave from its center position
         fillStyle: '#5d5ccc',
-        /* stroke: "#5d5ccc",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     },
     p2 : {
         speed: 0.8,
         shape: 6,
         amplitude: 40,
         fillStyle: "#05acec",
-        /* stroke: "#05acec",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     },
     p3 : {
         speed: .5,
         shape: 4,
         amplitude: 30,
         fillStyle: "#60c774",
-        /* stroke: "#60c774",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     },
     p4 : {
         speed: .6,
         shape: 5,
         amplitude: 40,
         fillStyle: "#fecb1c",
-        /* stroke: "#fecb1c",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     },
     p5 : {
         speed: .4,
         shape: 3,
         amplitude: 30,
         fillStyle: "#ff9101",
-        /* stroke: "#ff9101",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     },
     p6 : {
         speed: .4,
         shape: 3,
         amplitude: 1,
         fillStyle: "#eb3b42",
-        /* stroke: "#eb3b42",
-        shadow: {
-            color: "rgba(0,0,0,1)",
-            blur: 5,
-            offsetX: 0,
-            offsetY: 0,
-        } */
     }
 }
 
 // Configuration
-const FPS_LIMIT = 60;
+const FPS_LIMIT = 30;
 const INTERVAL = 1000 / FPS_LIMIT;
 let lastTime = 0;
 
 // Create a resolution scaling factor
-let resolutionScale = .2;
+let resolutionScale = .18;
 
 let segments= 20; // higher = smoother
 
@@ -102,6 +60,19 @@ const reversedPathKeys = [...pathKeys].reverse();
 let logicalWidth = window.innerWidth;
 let logicalHeight = window.innerHeight;
 let renderWidth, renderHeight;
+
+// Resize handling
+let resizeTimeout;
+let isResizing = false;
+
+// Mobile detection
+const MOBILE_BREAKPOINT = 768; // Define mobile breakpoint
+let isMobile = false;
+
+// Function to check if device is mobile
+function checkIfMobile() {
+    return logicalWidth <= MOBILE_BREAKPOINT;
+}
 
 // Optimize segment count based on screen width
 function getOptimalSegments(width) {
@@ -117,6 +88,9 @@ function resizeCanvas() {
     logicalWidth = window.innerWidth;
     logicalHeight = window.innerHeight;
 
+    // Update mobile status
+    isMobile = checkIfMobile();
+
     // Set display size (css pixels)
     canvas.style.width = logicalWidth + 'px';
     canvas.style.height = logicalHeight + 'px';
@@ -124,6 +98,11 @@ function resizeCanvas() {
     // Set actual size in memory (scaled for performance)
     renderWidth = Math.floor(logicalWidth * resolutionScale);
     renderHeight = Math.floor(logicalHeight * resolutionScale);
+
+    // Only set isResizing flag if this isn't the initial resize on page load
+    isResizing = true;
+
+    // Update main canvas dimensions
     canvas.width = renderWidth;
     canvas.height = renderHeight;
 
@@ -132,9 +111,33 @@ function resizeCanvas() {
 
     // Recreate all segments
     createSegments();
+
+    // A single immediate frame render to prevent the flash at the end
+    if (isResizing) {
+        // Run one immediate animation frame
+        const now = performance.now();
+        const time = now / 1000;
+        updateWavePositions(time);
+        renderFrame();
+    }
+
+    // Clear resize flag after a delay
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        isResizing = false;
+    }, 150);
 }
 
-window.addEventListener('resize', resizeCanvas);
+// Efficient resize handler
+function handleResize() {
+    // Only schedule a resize if we're not currently resizing
+    if (!isResizing) {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCanvas, 100);
+    }
+}
+
+window.addEventListener('resize', handleResize);
 resizeCanvas();
 
 // Create wave segments with optimized memory allocation
@@ -160,7 +163,7 @@ function createSegments() {
         const baseAmplitude = pathProps.amplitude || 30;
         let logicalAmplitude;
 
-        if (logicalHeight  < 700) {
+        if (logicalHeight < 700) {
             logicalAmplitude = (logicalHeight / 100) * (baseAmplitude / 1080 * 100);
         } else {
             logicalAmplitude = baseAmplitude;
@@ -212,9 +215,59 @@ function drawPath(points, fillStyle) {
     }
 }
 
+// Update wave positions - with mobile optimization
+function updateWavePositions(time) {
+    // On mobile, only animate first and last waves
+    if (isMobile && !isResizing) {
+        const firstPathKey = pathKeys[0];  // p1
+        const lastPathKey = pathKeys[pathKeys.length - 2];  // p5
+
+        // Update only first and last waves
+        updateWavePath(firstPathKey, time);
+        updateWavePath(lastPathKey, time);
+    } else {
+        // On desktop or during resize, update all waves
+        for (const pathKey of pathKeys) {
+            updateWavePath(pathKey, time);
+        }
+    }
+}
+
+// Helper function to update a single wave path
+function updateWavePath(pathKey, time) {
+    const pathProps = paths[pathKey];
+    const points = path_points[pathKey];
+    const speed = pathProps.speed;
+    const shape = pathProps.scaledShape;
+    const amplitude = pathProps.scaledAmplitude;
+    const height = pathProps.calculatedHeight;
+
+    // Batch update all points in this path
+    for (let i = 0; i <= segments; i++) {
+        const sinus = Math.sin(time * speed + i / shape);
+        points[i].y = sinus * amplitude + wave_height + height;
+    }
+}
+
+// Render a single frame
+function renderFrame() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw all paths - back to front
+    for (const pathKey of reversedPathKeys) {
+        drawPath(path_points[pathKey], paths[pathKey].fillStyle);
+    }
+}
+
 // Animation loop with significant optimizations
 function animate(currentTime) {
     requestAnimationFrame(animate);
+
+    // Skip animation frames during resize to reduce CPU load
+    if (isResizing) {
+        return;
+    }
 
     // Throttle framerate
     if (currentTime - lastTime < INTERVAL) return;
@@ -223,29 +276,11 @@ function animate(currentTime) {
     // Convert time to seconds
     const time = currentTime / 1000;
 
-    // Clear only what we need
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Update wave positions
+    updateWavePositions(time);
 
-    // Update path points - optimize to avoid array lookups in inner loop
-    for (const pathKey of pathKeys) {
-        const pathProps = paths[pathKey];
-        const points = path_points[pathKey];
-        const speed = pathProps.speed;
-        const shape = pathProps.scaledShape;
-        const amplitude = pathProps.scaledAmplitude;
-        const height = pathProps.calculatedHeight;
-
-        // Batch update all points in this path
-        for (let i = 0; i <= segments; i++) {
-            const sinus = Math.sin(time * speed + i / shape);
-            points[i].y = sinus * amplitude + wave_height + height;
-        }
-    }
-
-    // Draw all paths - back to front
-    for (const pathKey of reversedPathKeys) {
-        drawPath(path_points[pathKey], paths[pathKey].fillStyle);
-    }
+    // Render the frame
+    renderFrame();
 }
 
 // Start animation
