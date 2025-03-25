@@ -35,7 +35,7 @@ window.addEventListener('load', function() { // when page is loaded
 
                 navigator.share({
                     title: name + " | LGBTQIA+ & friends",
-                    text: name + "\n\n" + time + "\n" + loc + "\n ",
+                    text: name + "\n-\n" + time + "\n" + loc + "\n-",
                     url: link
                 }).then()
             });

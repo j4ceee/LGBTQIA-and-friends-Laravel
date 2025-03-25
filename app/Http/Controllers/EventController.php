@@ -80,6 +80,8 @@ class EventController extends CalendarController
             $event->save();
             $id = $event->id;
 
+            $this->generateICS();
+
             return redirect()
                 ->route('event.show', ['id' => $id])
                 ->with('success', __('events.create_success'));
@@ -175,8 +177,11 @@ class EventController extends CalendarController
             $id = $event->id;
 
             if ($wasChanged) {
-                $event->sequence = $event->sequence++;
+                $event->sequence = $event->sequence + 1;
                 $event->save();
+
+                $this->generateICS();
+
                 return redirect()
                     ->route('event.show', ['id' => $id])
                     ->with('success', __('events.update_success'));
@@ -190,9 +195,18 @@ class EventController extends CalendarController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(int $eventId)
     {
-        //
+        $events = $this->get_events(0, $eventId); // get event (throws 404 if none found)
+        $event = $events->first();
+
+        $event->delete();
+
+        $this->generateICS();
+
+        return redirect()
+            ->route('calendar')
+            ->with('success', __('events.delete_success'));
     }
 
     private function validateEvent(Request $request): void

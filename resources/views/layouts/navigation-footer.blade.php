@@ -4,7 +4,7 @@
         <x-nav-link-li :href="route('home')" :active="request()->routeIs('home')">
             {{ __('lgbt_home') }}
         </x-nav-link-li>
-        <x-nav-link-li :href="route('calendar')" :active="false">
+        <x-nav-link-li :href="route('calendar')" :active="request()->routeIs('calendar')">
             {{ __('lgbt_calendar') }}
         </x-nav-link-li>
     </ul>

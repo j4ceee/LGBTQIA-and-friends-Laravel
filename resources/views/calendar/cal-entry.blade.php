@@ -1,9 +1,7 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
-@props(['event', 'style'])
+@props(['event', 'style', 'locale'])
 
 @php
-    $locale = app()->getLocale();
-
     $event_name = $event->event_type->{"name_" . $locale};
     $event_id = $event->id;
     $event_location = $event->event_location->name;
@@ -112,8 +110,16 @@
     @auth
         <div class='calendar_item_admin_ctrl'>
             <div class='calendar_item_admin_cont'>
-                <a class='calendar_item_admin_link cal_admin_left' href="{{ route("event.edit", ["id" => $event_id]) }}" title="{{ __('lgbt_event_edit') }}"><span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span></a>
-                <a class='calendar_item_admin_link cal_admin_right' href="#" title="{{ __('lgbt_event_delete') }}"><span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span></a>
+                <a class='calendar_item_admin_link cal_admin_left' href="{{ route("event.edit", ["id" => $event_id]) }}" title="{{ __('lgbt_event_edit') }}">
+                    <span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span>
+                </a>
+                <form method="POST" action="{{ route('event.delete', ['id' => $event_id]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" title="{{ __('lgbt_event_delete') }}" class="calendar_item_admin_link cal_admin_right">
+                        <span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span>
+                    </button>
+                </form>
             </div>
         </div>
     @endauth

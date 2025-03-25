@@ -53,6 +53,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/event/{id}/edit', [EventController::class, 'update'])
         ->where('id', '[0-9]+')
         ->name('event.update');
+
+    Route::delete('/event/{id}/delete', [EventController::class, 'destroy'])
+        ->where('id', '[0-9]+')
+        ->name('event.delete');
 });
 
 require __DIR__.'/auth.php';

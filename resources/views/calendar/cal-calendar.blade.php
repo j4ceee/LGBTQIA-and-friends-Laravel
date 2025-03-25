@@ -8,6 +8,8 @@ if ($headerLevel < 1 || $headerLevel > 6) {
 $header = '<h'.$headerLevel.' class="section_heading"></h'.$headerLevel.'>';
 
 $event_count = count($events);
+
+$locale = app()->getLocale();
 @endphp
 
 <section class="calendar">
@@ -34,14 +36,13 @@ $event_count = count($events);
         @else
         <ul class='calendar_list {{ $style == "compact" ? "calendar_compact" : "" }}'>
             @foreach($events as $event)
-                @include('calendar.cal-entry', ['event' => $event, 'style' => $style])
+                @include('calendar.cal-entry', ['event' => $event, 'style' => $style, 'locale' => $locale])
             @endforeach
         </ul>
         @endif
     </div>
 
-    {{-- TODO: add iCal link when iCal functions are done --}}
-    <button class="lgbt_button cal_subscribe_btn" id="default_calendar_copy_button" data-link="#" data-desc="{{ __('lgbt_cal_sub_cop') }}" type="button">
+    <button class="lgbt_button cal_subscribe_btn" id="default_calendar_copy_button" data-link="{{ Storage::disk('public')->url('ics/lgbt-hs-ansbach-events-'.$locale.'.ics') }}" data-desc="{{ __('lgbt_cal_sub_cop') }}" type="button">
         <span class="cal_admin_add_icon cal_subscribe_icon" style='mask: url({{ Vite::asset("resources/img/noun-copy-4584147.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-copy-4584147.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span>
         <span class="cal_admin_add_icon cal_subscribe_icon icon_glow" aria-hidden='true'></span>
         {{ __('lgbt_cal_sub') }}
