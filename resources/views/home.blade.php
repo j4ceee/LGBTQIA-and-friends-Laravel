@@ -21,7 +21,7 @@
             </div>
         </section>
 
-        @include('calendar.cal-calendar', ['events' => $events, 'style' => 'test'])
+        @include('calendar.cal-calendar', ['events' => $events, 'style' => 'compact'])
     </div>
 
     <div class="home_slide_3">

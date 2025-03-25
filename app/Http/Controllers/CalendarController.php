@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
     /**
-     * Get all events
+     * Get all events in the last $subWeeks weeks or one specific event. Single event mode throws 404 if none found.
      * @param int $subWeeks How many weeks back events should be included
      * @param int|null $event_id
      * @return Collection
@@ -25,6 +24,10 @@ class CalendarController extends Controller
         }
         else {
             $events = Event::where('id', $event_id)->get();
+
+            if ($events == null || $events->isEmpty()) {
+                abort(404);
+            }
         }
         return $events;
     }

@@ -8,6 +8,8 @@
     "lgbt_home" : "Home",
     "lgbt_calendar" : "Kalender",
     "lgbt_profile.edit" : "Profil",
+    "lgbt_event.edit" : "Treffen Bearbeiten",
+    "lgbt_event.add" : "Treffen Hinzufügen",
 
     "alt_signet" : "Signet der LGBTQIA+ & friends Gruppe der Hochschule Ansbach",
     "alt_signet_link" : "Signet der LGBTQIA+ & friends Gruppe der Hochschule Ansbach, zur Startseite",
@@ -24,6 +26,9 @@
     "lgbt_account_menu" : "Account-Menü",
     "lgbt_event_delete" : "Lösche Treffen ",
     "lgbt_event_edit" : "Bearbeite Treffen ",
+    "lgbt_event_add" : "Treffen hinzufügen",
+    "lgbt_cal_sub" : "Kalender abonnieren",
+    "lgbt_cal_sub_cop" : "iCalendar Link kopiert:",
 
     "lgbt_about_text" : "🌈 Willkommen bei der LGBTQIA+ & friends Gruppe der Hochschule Ansbach! 🎉 \nEgal, ob du Teil der Community bist oder eine unterstützende / befreundete Person, wir laden dich herzlich ein, dich uns anzuschließen. Seit 2018 bieten wir einen sicheren Raum, um über sexuelle Orientierung und geschlechtliche Identität offen zu sprechen, uns gegenseitig zu unterstützen und gemeinsam viel Spaß zu haben! 🤝 Komme gerne zu unserem nächsten Treffen und werde Teil unserer Gruppe. Lass uns gemeinsam für eine vielfältige und inklusive Campus-Kultur sorgen! 💬✨",
     "lgbt_h_about" : "Über uns",
@@ -31,5 +36,14 @@
     "lgbt_h_team" : "Unser Team",
     "lgbt_h_socials" : "Socials & Kontakt",
 
-    "err_no_events" : "Keine anstehenden Treffen."
+    "err_no_events" : "Keine anstehenden Treffen.",
+
+    "lgbt_ev_general" : "Allgemeine Informationen",
+    "lgbt_ev_location" : "Ort",
+    "lgbt_ev_start" : "Beginn",
+    "lgbt_ev_end" : "Ende",
+    "lgbt_ev_use_desc" : "Beschreibung verwenden",
+    "lgbt_ev_def_desc" : "Standard Beschreibung: ",
+
+    "lgbt_share" : "Teilen"
 }

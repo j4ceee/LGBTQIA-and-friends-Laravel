@@ -4,7 +4,7 @@
         <x-nav-link-li :href="route('home')" :active="request()->routeIs('home')">
             {{ __('lgbt_home') }}
         </x-nav-link-li>
-        <x-nav-link-li :href="route('home')" :active="false">
+        <x-nav-link-li :href="route('calendar')" :active="false">
             {{ __('lgbt_calendar') }}
         </x-nav-link-li>
     </ul>
@@ -13,10 +13,10 @@
 <div class="hidden sm:flex sm:items-center sm:justify-center">
     <x-dropdown align="auth_modal_pos" width="48" contentClasses="auth_modal" dialogLabel="{{ __('lgbt_account_menu') }}">
         <x-slot name="trigger">
-            <button class="auth_button" aria-label="{{ __('lgbt_account_button') }}">
+            <button class="auth_button" aria-label="{{ __('lgbt_account_button') }}" type="button">
                 @auth
                     <span>{{ Auth::user()->username }}</span>
-                @endif
+                @endauth
 
                 <svg viewBox="0 0 1200 1200" class="auth_icon"
                      xmlns="http://www.w3.org/2000/svg">

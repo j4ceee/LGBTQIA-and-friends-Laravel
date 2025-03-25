@@ -172,6 +172,74 @@ body,
     padding: 0 0 5rem 0;
 }
 
+/*--------------------Default Styles-------------------------*/
+
+.section_header {
+    height: min-content;
+    position: relative;
+    margin: 1rem 0 1.5rem;
+}
+
+.section_heading {
+    font-size: 2rem;
+    margin: 0;
+    text-align: center;
+    padding: 0 1rem 0 1rem; /* top right bottom left */
+}
+
+.section_header_underline {
+    position: absolute;
+    width: 100%;
+    height: .7rem;
+    /*background-image: linear-gradient(120deg, var(--lgbt-red), var(--lgbt-red) 16.66%, var(--lgbt-orange) 16.66%, var(--lgbt-orange) 33.33%, var(--lgbt-yellow) 33.33%, var(--lgbt-yellow) 50%, var(--lgbt-green) 50%, var(--lgbt-green) 66.66%, var(--lgbt-blue) 66.66%, var(--lgbt-blue) 83.33%, var(--lgbt-purple) 83.33%, var(--lgbt-purple));/**/
+    background-image: linear-gradient(120deg, var(--lgbt-red), var(--lgbt-orange), var(--lgbt-yellow), var(--lgbt-green), var(--lgbt-blue), var(--lgbt-purple));/**/
+    margin: 0;
+    padding: 0;
+    border-radius: 1rem;
+    z-index: -1;
+    bottom: -.4rem;
+}
+
+.main section,
+.main_home section {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+main p {
+    font-family: "Baloo 2 Medium", 'Baloo 2 Medium Fallback', sans-serif;
+    font-size: 1.1rem;
+}
+
+.button_container {
+    width: 100%;
+    max-width: 68rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lgbt_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    gap: .2rem;
+    font-family: "Baloo 2 Medium", "Baloo 2 Medium Fallback", sans-serif;
+    padding: .3rem .5rem;
+    border-radius: 2rem;
+    z-index: 0;
+    transition: .2s;
+}
+
+.lgbt_button:hover,
+.lgbt_button:focus-within {
+    background-color: var(--lgbt-footer);
+}
+
 /*----------------------------Header--------------------------------*/
 
 /*noinspection CssInvalidPropertyValue*/
@@ -617,49 +685,6 @@ footer {
     }
 }
 
-/*------------------Default Styles-------------------------*/
-
-.section_header {
-    height: min-content;
-    position: relative;
-    margin: 1rem 0 1.5rem;
-}
-
-.section_heading {
-    font-size: 2rem;
-    margin: 0;
-    text-align: center;
-    padding: 0 1rem 0 1rem; /* top right bottom left */
-}
-
-.section_header_underline {
-    position: absolute;
-    width: 100%;
-    height: .7rem;
-    /*background-image: linear-gradient(120deg, var(--lgbt-red), var(--lgbt-red) 16.66%, var(--lgbt-orange) 16.66%, var(--lgbt-orange) 33.33%, var(--lgbt-yellow) 33.33%, var(--lgbt-yellow) 50%, var(--lgbt-green) 50%, var(--lgbt-green) 66.66%, var(--lgbt-blue) 66.66%, var(--lgbt-blue) 83.33%, var(--lgbt-purple) 83.33%, var(--lgbt-purple));/**/
-    background-image: linear-gradient(120deg, var(--lgbt-red), var(--lgbt-orange), var(--lgbt-yellow), var(--lgbt-green), var(--lgbt-blue), var(--lgbt-purple));/**/
-    margin: 0;
-    padding: 0;
-    border-radius: 1rem;
-    z-index: -1;
-    bottom: -.4rem;
-}
-
-.main section,
-.main_home section {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main p,
-.main_home p {
-    font-family: "Baloo 2 Medium", 'Baloo 2 Medium Fallback', sans-serif;
-    font-size: 1.1rem;
-}
-
 /*--------------------Homepage-------------------------*/
 
 .welcome_slide{
@@ -933,7 +958,7 @@ footer {
         --angle: 305deg;
     }
     to {
-        --angle: -45deg;
+        --angle: -55deg;
     }
 }
 
@@ -1042,6 +1067,7 @@ footer {
 }
 
 .calendar_item_date {
+    order: 1;
     min-width: fit-content;
     width: 16%;
     flex-basis: 16%;
@@ -1090,9 +1116,19 @@ footer {
 
 .calendar_item_info
 {
+    order: 2;
     width: 52%;
     flex-basis: 52%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    flex-direction: row;
 }
+.calendar_item_info:has(details[open]) {
+    flex-direction: column;
+}
+
 .calendar_item_name {
     font-size: 1.6rem;
     line-height: 1.6rem;
@@ -1133,6 +1169,7 @@ footer {
 }
 
 .calendar_item_location {
+    order: 3;
     width: 25%;
     flex-basis: 25%;
     display: flex;
@@ -1305,44 +1342,81 @@ footer {
     line-height: 1.2rem;
 }
 
-.full_calendar_link {
-    position: absolute;
-    margin: 0;
-    right: 2rem;
-    top: -2.3rem;
-    z-index: 1;
+.add_event_button {
+    align-self: flex-end;
 }
-.full_calendar_link a {
-    color: var(--alt-blue);
-    font-family: "Baloo 2 Medium", 'Baloo 2 Medium Fallback', sans-serif;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: 0.2s;
-    border-radius: 1.5rem 1.5rem 0 0;
-    background-color: var(--lgbt-cal);
-    padding: .5rem 1rem 0.2rem 1.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: .5rem;
-    align-items: center;
+
+.cal_admin_add_icon {
+    position: relative;
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
+    transform: rotate(0);
+    transition: .4s;
+    background-image: linear-gradient(135deg, var(--lgbt-red) 32%, var(--lgbt-orange) 39%, var(--lgbt-yellow) 46%, var(--lgbt-green) 53%, var(--lgbt-blue) 60%, var(--lgbt-purple) 65%);
 }
-.full_calendar_link a:hover,
-.full_calendar_link a:focus-within {
-    color: var(--lgbt-bg);
-    background-color: var(--lgbt-blue);
-    transition: 0.2s;
+
+.add_event_button:hover .cal_admin_add_icon,
+.add_event_button:focus-within .cal_admin_add_icon {
+    transform: rotate(370deg);
 }
-.full_calendar_icon {
-    width: 1.2rem;
-    height: 1.2rem;
-    background-color: var(--lgbt-blue);
-    transition: 0.2s;
+
+.cal_subscribe_btn {
+    margin-top: 1rem;
 }
-.full_calendar_link a:hover .full_calendar_icon,
-.full_calendar_link a:focus-within .full_calendar_icon {
-    background-color: var(--lgbt-bg);
-    transition: 0.2s;
+
+.cal_subscribe_icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: scale(100%);
 }
+
+.cal_subscribe_btn:hover .cal_subscribe_icon,
+.cal_subscribe_btn:focus-within .cal_subscribe_icon {
+    transform: scale(120%);
+}
+
+.event_share_btn {
+    height: fit-content;
+    width: fit-content;
+    order: 3;
+    padding: 0; /* padding-bottom: .8rem; */
+    font-size: 1rem;
+}
+
+.cal_share_icon {
+    background-image: linear-gradient(90deg, var(--lgbt-red) 10%, var(--lgbt-orange) 25%, var(--lgbt-yellow) 40%, var(--lgbt-green) 55%, var(--lgbt-blue) 70%, var(--lgbt-purple) 85%);
+    transform: rotate(0deg) scale(100%);
+}
+
+.cal_share_icon.icon_glow {
+    opacity: 0.1;
+}
+
+.event_share_btn:hover .cal_share_icon,
+.event_share_btn:focus-within .cal_share_icon {
+    transform: rotate(0deg) scale(105%);
+    animation: wiggle .8s .2s;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg) scale(105%);
+    }
+    25% {
+        transform: rotate(10deg) scale(105%);
+    }
+    50% {
+        transform: rotate(-10deg) scale(105%);
+    }
+    75% {
+        transform: rotate(10deg) scale(105%);
+    }
+    100% {
+        transform: rotate(0deg) scale(105%);
+    }
+}
+
 
 @media screen and (max-width: 768px) {
     .calendar_item {
@@ -1369,6 +1443,7 @@ footer {
         order: 3;
         width: 100%;
         flex-basis: 100%;
+        flex-direction: column;
     }
     .calendar_item_name {
         font-size: 1.5rem;
@@ -1511,9 +1586,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1; /* equal width for all cards */
     text-wrap: nowrap;
-    max-width: fit-content;
+    max-width: 18rem;
+    flex-grow: 1;
 }
 
 .staff_img_container {
@@ -1597,6 +1672,7 @@ footer {
     align-items: center;
     text-align: center;
     margin-top: 1rem;
+    width: 100%;
 }
 
 .staff_info_field {
@@ -1623,6 +1699,9 @@ footer {
     margin-top: .7rem;
     padding: .5rem 1rem;
     border-radius: .8rem;
+    max-width: 100%;
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
 }
 
 
@@ -1747,4 +1826,76 @@ footer {
 
 #github_cont::after {
     background-color: #211F1F;
+}
+
+/*--------------------Default Styles Override-------------------------*/
+
+.icon_glow {
+    position: absolute;
+    filter: blur(.6rem);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/*-------------------- Status Message -------------------------*/
+
+.alert {
+    margin: 2rem 0;
+    display: flex;
+    padding: .6rem;
+    border-radius: 0.5rem;
+    width: 60%;
+    max-width: 40rem;
+    height: 60%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--lgbt-text);
+    font-weight: bold;
+    background-color: var(--lgbt-cal);
+    text-align: center;
+}
+
+.alert::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    box-sizing: content-box;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: -1;
+}
+
+.alert::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: blur(1rem);
+    z-index: -2;
+}
+
+.alert-error {
+    color: var(--lgbt-red);
+}
+.alert-error::after,
+.alert-error::before {
+    background-color: var(--lgbt-red);
+}
+.alert-success {
+    color: var(--lgbt-green);
+}
+.alert-success::after,
+.alert-success::before {
+    background-color: var(--lgbt-green);
+}
+
+
+.alert-info {
+    color: var(--grey-text);
+}
+.alert-info::after,
+.alert-info::before {
+    background-color: var(--grey-text);
 }

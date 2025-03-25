@@ -15,7 +15,7 @@
                         <x-nav-link-li :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('lgbt_home') }}
                         </x-nav-link-li>
-                        <x-nav-link-li :href="route('home')" :active="false">
+                        <x-nav-link-li :href="route('calendar')" :active="request()->routeIs('calendar')">
                             {{ __('lgbt_calendar') }}
                         </x-nav-link-li>
                     </ul>
@@ -56,7 +56,7 @@
                             {{ __('lgbt_home') }}
                         </x-responsive-nav-link-li>
 
-                        <x-responsive-nav-link-li :href="route('home')" :active="false">
+                        <x-responsive-nav-link-li :href="route('calendar')" :active="request()->routeIs('calendar')">
                             {{ __('lgbt_calendar') }}
                         </x-responsive-nav-link-li>
 

@@ -29,7 +29,7 @@
     <meta name="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ Vite::asset("resources/img/lgbt_bunny.png") }}">
-    <link rel="canonical" content="{{ route('home') }}">
+    <link rel="canonical" content="{{ route('home') }}" href="{{ route('home') }}">
 
     {{-- Scripts --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])

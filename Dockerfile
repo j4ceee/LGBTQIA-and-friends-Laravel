@@ -29,7 +29,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     supervisor \
-    netcat-openbsd
+    netcat-openbsd \
+    libmagickwand-dev --no-install-recommends && \
+    pecl install imagick && \
+    docker-php-ext-enable imagick
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

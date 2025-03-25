@@ -12,7 +12,7 @@
 
     // cache
     $tmp_desc_override = $event->{"desc_".$locale."_override"};
-    $tmp_desc_default = $event->event_type->{"desc_".$locale."_default"};
+    $tmp_desc_default = $event->event_type->{"desc_".$locale};
 
     if ($tmp_desc_override === "-") {
         // no description
@@ -26,6 +26,12 @@
 
     $tmp_date_start = $event->date_start; // cache
     $tmp_date_start = $tmp_date_start->setTimezone('Europe/Berlin');
+
+    $tmp_date_end = $event->date_end;
+    $tmp_date_end = $tmp_date_end->setTimezone('Europe/Berlin');
+
+    $share_date = $tmp_date_start->translatedFormat('d.m.Y');
+
     $date_start_day = $tmp_date_start->translatedFormat('jS');
     $date_start_month = $tmp_date_start->translatedFormat('F');
     $date_start_year = $tmp_date_start->translatedFormat('Y');
@@ -33,8 +39,13 @@
     $time_format = $locale === "de" ? 'H:i' : 'h:i a';
     $date_start_time = $tmp_date_start->translatedFormat($time_format);
 
+    $share_time = $date_start_time;
+    if ($locale === "de") {
+        $share_time .= " Uhr";
+    }
+
     // booleans
-    $eventPast = $tmp_date_start < now()->setTimezone('Europe/Berlin');
+    $eventPast = $tmp_date_end < now()->setTimezone('Europe/Berlin');
     $hasDesc = $event_desc != '';
 
     // calendar_item div classes
@@ -54,45 +65,56 @@
     <div class="{{ implode(' ', $classes) }}" @foreach($attributes as $key => $value)
         {{ $key }}="{{ $value }}"
     @endforeach >
-    <time class='calendar_item_date' datetime="{{ $tmp_date_start->translatedFormat('Y-m-d') }}">
-        @if($locale == "de")
-            <p class='calendar_item_day'>{{ $date_start_day }}</p>
-            <p class='calendar_item_month'>{{ $date_start_month }}</p>
-        @elseif($locale == "en")
-            <p class='calendar_item_month'>{{ $date_start_month }}</p>
-            <p class='calendar_item_day'>{{ $date_start_day }}</p>
-        @endif
-        <p class='calendar_item_year'>{{ $date_start_year }}</p>
-    </time>
+        <time class='calendar_item_date' datetime="{{ $tmp_date_start->translatedFormat('Y-m-d') }}">
+            @if($locale == "de")
+                <p class='calendar_item_day'>{{ $date_start_day }}</p>
+                <p class='calendar_item_month'>{{ $date_start_month }}</p>
+            @elseif($locale == "en")
+                <p class='calendar_item_month'>{{ $date_start_month }}</p>
+                <p class='calendar_item_day'>{{ $date_start_day }}</p>
+            @endif
+            <p class='calendar_item_year'>{{ $date_start_year }}</p>
+        </time>
 
-    <div class='calendar_item_info'>
-        <p class='calendar_item_name'>{{ $event_name }}</p>
-        @if($event_desc == "")
-            <p class='calendar_item_desc' aria-hidden="true"></p>
-        @else
-            <details id="event_det_{{ $event_id }}" class="calendar_item_desc">
-                <summary class="calendar_item_desc_ctrl" data-event-id="{{ $event_id }}">Details</summary>
-                {!! nl2br(e($event_desc)) !!}
-            </details>
-        @endif
-    </div>
+        <div class='calendar_item_info'>
+            <div>
+                <p class='calendar_item_name'>{{ $event_name }}</p>
+                @if($event_desc == "")
+                    {{-- <p class='calendar_item_desc' aria-hidden="true"></p> --}}
+                @else
+                    <details id="event_det_{{ $event_id }}" class="calendar_item_desc">
+                        <summary class="calendar_item_desc_ctrl" data-event-id="{{ $event_id }}">Details</summary>
+                        {!! nl2br(e($event_desc)) !!}
+                    </details>
+                @endif
+            </div>
 
-    <div class='calendar_item_location'>
-        <time class='calendar_item_loc_time'
-              datetime="{{ $tmp_date_start->translatedFormat('H:i') }}">{{ $date_start_time }}</time>
-        <p class='calendar_item_loc_name' lang='de'>{{ $event_location }}</p>
-    </div>
+            <button class="lgbt_button event_share_btn" type="button" title="{{ __('lgbt_share') }}"
+                    data-link="{{ route('event.show', ['id' => $event_id]) }}"
+                    data-name="{{ $event_name }}"
+                    data-time="{{ __('lgbt_ev_start') . ": " . $share_date . ", " . $share_time }}"
+                    data-loc="{{ __('lgbt_ev_location') . ": " . $event_location }}"
+            >
+                <span class="cal_admin_add_icon cal_share_icon" style='mask: url({{ Vite::asset("resources/img/noun-share-7697480.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-share-7697480.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span>
+                <span class="cal_admin_add_icon cal_share_icon icon_glow" aria-hidden='true'></span>
+                {{ __('lgbt_share') }}
+            </button>
+        </div>
+
+        <div class='calendar_item_location'>
+            <time class='calendar_item_loc_time'
+                  datetime="{{ $tmp_date_start->translatedFormat('H:i') }}">{{ $date_start_time }}</time>
+            <p class='calendar_item_loc_name' lang='de'>{{ $event_location }}</p>
+        </div>
     </div>
 
     {{-- Admin Stuff --}}
     @auth
         <div class='calendar_item_admin_ctrl'>
             <div class='calendar_item_admin_cont'>
-                <a class='calendar_item_admin_link cal_admin_left' href="#" title="{{ __('lgbt_event_edit') }}"><span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span></a>
+                <a class='calendar_item_admin_link cal_admin_left' href="{{ route("event.edit", ["id" => $event_id]) }}" title="{{ __('lgbt_event_edit') }}"><span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-edit-1047822.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span></a>
                 <a class='calendar_item_admin_link cal_admin_right' href="#" title="{{ __('lgbt_event_delete') }}"><span class='cal_admin_link_icon' style='mask: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}) no-repeat center / contain; -webkit-mask-image: url({{ Vite::asset("resources/img/noun-trash-2025467.svg") }}); -webkit-mask-repeat:  no-repeat; -webkit-mask-position:  center; -webkit-mask-size: contain' aria-hidden='true'></span></a>
             </div>
         </div>
-    @endif
-
-    {{-- TODO: add share button to every event --}}
+    @endauth
 </li>

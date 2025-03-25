@@ -22,30 +22,37 @@ window.addEventListener('load', function() { // when page is loaded
         });
     });
 
-    let iCal = null;
+    // get all share buttons and add an event listener to each
+    document.querySelectorAll('.event_share_btn').forEach(item => {
+        if (navigator.share) {
+            item.addEventListener('click', (event) => {
+                event.stopPropagation();
 
-    try {
-        iCal = document.getElementById('ical_controls_cont');
-        // get the ical controls container
-        // iCal is element if found, null if not found
-    } catch (e) {
-        // do nothing
-    }
+                const link = event.currentTarget.getAttribute('data-link');
+                const name = event.currentTarget.getAttribute('data-name');
+                const time = event.currentTarget.getAttribute('data-time');
+                const loc = event.currentTarget.getAttribute('data-loc');
 
-    if (iCal === null) {
-        // if iCal is not found, do not add event listeners
-
-        return;
-    }
+                navigator.share({
+                    title: name + " | LGBTQIA+ & friends",
+                    text: name + "\n\n" + time + "\n" + loc + "\n ",
+                    url: link
+                }).then()
+            });
+        } else {
+            // TODO: add fallback where share() is not supported (e.g. Firefox Desktop)
+            item.style.display = 'none';
+        }
+    });
 
     // add an event listener to the default calendar copy button
-    document.getElementById('default_calendar_copy_button').addEventListener('click', () => {
-        let anchorElement = document.getElementById('default_calendar_link');
-        // default_calendar_link is the anchor tag that contains the link, copy a href attribute
-        let copyText = anchorElement.getAttribute('href');
+    let copyBtn = document.getElementById('default_calendar_copy_button');
+    copyBtn.addEventListener('click', () => {
+        let descText = copyBtn.getAttribute('data-desc');
+        let copyText = copyBtn.getAttribute('data-link');
         navigator.clipboard.writeText(copyText).then(function() {
             // show a success message
-            alert('Link copied to clipboard:\n' + copyText);
+            alert(descText + '\n' + copyText);
         });
     });
 });

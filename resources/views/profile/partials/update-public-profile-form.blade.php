@@ -54,7 +54,7 @@
         <div>
             <x-input-label for="avatar" :value="__('profile.avatar')"/>
             <p class="my-1 text-gray-400 text-sm">{{ __('profile.avatar_d') }}</p>
-            <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" accept="image/jpeg, image/webp" :value="old('avatar', $user->avatar)"
+            <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" accept="image/jpeg, image/webp, image/png" :value="old('avatar', $user->avatar)"
                           />
             <x-input-error class="mt-2" :messages="$errors->get('avatar')"/>
         </div>

@@ -77,4 +77,5 @@ To update npm dependencies, open the terminal in your `node` container and run:\
 `npm update`.
 
 ### Important ###
-<mark style="padding: 3px">-Afterwards you should delete the docker images of `app` and / or `node`-</mark>
+<mark style="padding: 3px">- Afterwards you should delete the docker images of `app` and / or `node`-</mark><br>
+<mark style="padding: 3px">- When rebuilding the app image make sure to delete any existing symlinks first -</mark>

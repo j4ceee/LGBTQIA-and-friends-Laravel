@@ -10,6 +10,7 @@ export default defineConfig({
 
                 'resources/js/animated_bg.js',
                 'resources/js/manage_event.js',
+                'resources/css/manage_event.css',
                 'resources/js/view_calendar.js',
             ],
             refresh: true,

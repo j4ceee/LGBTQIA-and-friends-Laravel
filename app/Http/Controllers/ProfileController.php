@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -61,7 +62,7 @@ class ProfileController extends Controller
             'bio_en' => ['required', 'string', 'max:50'],
 
             // validate avatar file
-            'avatar' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,webp', 'dimensions:min_width=100,min_height=100,max_width=1024,max_height=1024,ratio=1:1'],
+            'avatar' => ['nullable', 'image', 'max:2048', 'mimes:jpeg,webp,png', 'dimensions:min_width=100,min_height=100,max_width=2048,max_height=2048,ratio=1:1'],
         ]);
 
         $wasChanged = false;
@@ -93,7 +94,9 @@ class ProfileController extends Controller
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $file = $request->file('avatar');
-            $filename = $file->hashName();
+            $image = Image::read($file)->resize(300, 300);
+
+            $filename = $file->hashName() . '.webp';
             $path = 'img/users/';
 
             // Delete old avatar if exists
@@ -103,7 +106,11 @@ class ProfileController extends Controller
             }
 
             // Store the new avatar
-            $file->storeAs($path, $filename, 'public');
+            Storage::disk('public')->put(
+                $path.$filename,
+                $image->toWebp(75, true)
+            );
+
             $user->avatar = $filename;
             $wasChanged = true;
         }

@@ -1,5 +1,14 @@
+let eventButton;
+let descInputDe;
+let descInputEn;
+let placeholderPrepend;
+
 window.onload = function() {
-    let eventButton = document.getElementById('enable_desc');
+    descInputEn = document.getElementById("event_desc_en");
+    descInputDe = document.getElementById("event_desc_de");
+    placeholderPrepend = descInputDe.dataset.prepend;
+
+    eventButton = document.getElementById('enable_desc');
 
     eventButton.addEventListener('click', toggleEventDesc);
 
@@ -8,6 +17,26 @@ window.onload = function() {
 
     startTime.addEventListener('input', function() {
         mirrorStartToEndDate(startTime);
+    });
+
+    // Add event listeners for title inputs
+    let titleEn = document.getElementById('event_name_en');
+    let titleDe = document.getElementById('event_name_de');
+
+    let descId = null;
+
+    titleEn.addEventListener('input', function() {
+        descId = setOtherTitle('en');
+        if (descId) {
+            setPlaceholder(descId);
+        }
+    });
+
+    titleDe.addEventListener('input', function() {
+        descId = setOtherTitle('de');
+        if (descId) {
+            setPlaceholder(descId);
+        }
     });
 }
 
@@ -62,8 +91,32 @@ function setOtherTitle(currentTitle) {
             if (otherOptionValue !== null) {
                 // set the value of the other input to the value of the other option element
                 otherInput.value = otherOptionValue;
+
+                return currentDataValue;
             }
         }
+    }
+
+    return null;
+}
+
+function setPlaceholder(id) {
+    let descDeElement = document.querySelector(`#event_name_de_list option[data-value="${id}"]`);
+    let descEnElement = document.querySelector(`#event_name_en_list option[data-value="${id}"]`);
+
+    let descDe = descDeElement ? descDeElement.dataset.desc : null;
+    let descEn = descEnElement ? descEnElement.dataset.desc : null;
+
+    if (descDe) {
+        descInputDe.placeholder = placeholderPrepend + "\n" + descDe;
+    } else {
+        descInputDe.placeholder = "";
+    }
+
+    if (descEn) {
+        descInputEn.placeholder = placeholderPrepend + "\n" + descEn;
+    } else {
+        descInputEn.placeholder = "";
     }
 }
 
@@ -71,7 +124,7 @@ function mirrorStartToEndDate(startInput) {
     let startDate = new Date(startInput.value);
     new Date(document.getElementById('event_date_end').value);
     // add 2 hours to the start input value
-    startDate.setHours(startDate.getHours() + 2);
+    startDate.setHours(startDate.getHours() + 4);
 
     // adjust the time to local timezone
     let localOffset = startDate.getTimezoneOffset() * 60000;

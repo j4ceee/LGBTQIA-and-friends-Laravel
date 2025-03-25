@@ -8,6 +8,8 @@
     "lgbt_home" : "Home",
     "lgbt_calendar" : "Calendar",
     "lgbt_profile.edit" : "Profile",
+    "lgbt_event.edit" : "Treffen Bearbeiten",
+    "lgbt_event.add" : "Treffen Hinzufügen",
 
     "alt_signet" : "Signet of the LGBTQIA+ & friends group at Ansbach University",
     "alt_signet_link" : "Signet of the LGBTQIA+ & friends group at Ansbach University, to homepage",
@@ -24,6 +26,9 @@
     "lgbt_account_menu" : "Account menu",
     "lgbt_event_delete" : "Delete Event ",
     "lgbt_event_edit" : "Edit Event ",
+    "lgbt_event_add" : "Add Event",
+    "lgbt_cal_sub" : "Subscribe to calendar",
+    "lgbt_cal_sub_cop" : "Copied iCalendar link:",
 
     "lgbt_about_text" : "🌈 Welcome to the LGBTQIA+ & friends group at Ansbach University! 🎉 \nWhether you're part of the community or a supportive friend, we warmly invite you to join us. Since 2018, we've provided a safe space to openly discuss sexual orientation and gender identity, support each other, and have lots of fun together! 🤝 Feel free to come to our next meeting and become part of our group. Let's work together to create a diverse and inclusive campus culture! 💬✨",
     "lgbt_h_about" : "About us",
@@ -31,5 +36,14 @@
     "lgbt_h_team" : "Our Team",
     "lgbt_h_socials" : "Socials & Contact",
 
-    "err_no_events" : "No upcoming events."
+    "err_no_events" : "No upcoming events.",
+
+    "lgbt_ev_general" : "General Event Information",
+    "lgbt_ev_location" : "Location",
+    "lgbt_ev_start" : "Start",
+    "lgbt_ev_end" : "End",
+    "lgbt_ev_use_desc" : "Use description",
+    "lgbt_ev_def_desc" : "Default description: ",
+
+    "lgbt_share" : "Share"
 }

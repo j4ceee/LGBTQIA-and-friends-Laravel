@@ -13,7 +13,7 @@ return[
     "bio_de" => "German Bio",
     "bio_en" => "English Bio",
     "avatar" => "Profile Picture",
-    "avatar_d" => "Format: JPG / WEBP, max. 1024kb, 1:1 ratio, max. 1024x1024px",
+    "avatar_d" => "Format: JPG / WEBP / PNG, max. 2MB, 1:1 ratio, max. 2048x2048px",
 
     "pronouns_l" => [ // changes made here must be reflected in the ProfileController
         "all" => "all pronouns",
