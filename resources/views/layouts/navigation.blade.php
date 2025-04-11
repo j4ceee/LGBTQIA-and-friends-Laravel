@@ -18,6 +18,11 @@
                         <x-nav-link-li :href="route('calendar')" :active="request()->routeIs('calendar')">
                             {{ __('lgbt_calendar') }}
                         </x-nav-link-li>
+                        @if(auth()->check() && auth()->user()->admin)
+                            <x-nav-link-li :href="route('admin')" :active="request()->routeIs('admin')">
+                                {{ __('lgbt_admin') }}
+                            </x-nav-link-li>
+                        @endif
                     </ul>
                 </nav>
 
@@ -60,6 +65,12 @@
                             {{ __('lgbt_calendar') }}
                         </x-responsive-nav-link-li>
 
+                        @if(auth()->check() && auth()->user()->admin)
+                            <x-responsive-nav-link-li :href="route('admin')" :active="request()->routeIs('admin')">
+                                {{ __('lgbt_admin') }}
+                            </x-responsive-nav-link-li>
+                        @endif
+
                         @auth
                             <x-responsive-nav-link-li :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                                 {{ __('lgbt_profile.edit') }}
@@ -82,9 +93,7 @@
                         {{-- Logout --}}
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-responsive-nav-link :href="route('logout')" :active="false"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            <x-responsive-nav-link :href="route('logout')" :active="false" id="logoutBtnMobile">
                                 {{ __('auth.logout') }}
                             </x-responsive-nav-link>
                         </form>

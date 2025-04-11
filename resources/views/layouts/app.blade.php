@@ -23,12 +23,9 @@
                 </aside>
 
                 @if (isset($header) && $header)
-                    <div class="flex justify-center align-center">
-                        <div class="section_header">
-                            <h1 class="section_heading">{{ $header }}</h1>
-                            <div class="section_header_underline"></div>
-                        </div>
-                    </div>
+                    <x-page-header>
+                        {{ $header }}
+                    </x-page-header>
                 @endif
 
                 {{ $slot }}

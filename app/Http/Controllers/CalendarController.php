@@ -21,7 +21,7 @@ class CalendarController extends Controller
         if (!$event_id) { // not fetching specific event
             $start_time = now()->subWeeks($subWeeks)->startOfDay();
 
-            $events = Event::where('date_start', '>=', $start_time)->get();
+            $events = Event::where('date_start', '>=', $start_time)->orderBy('date_start', 'asc')->get();
         }
         else {
             $events = Event::where('id', $event_id)->get();

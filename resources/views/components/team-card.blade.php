@@ -1,4 +1,4 @@
-@props(['member'])
+@props(['member', 'lang_t' => null])
 <div class="staff_card">
     <div class='staff_img_container'>
         @if ($member->avatar != null && $member->display_name != null)
@@ -15,13 +15,14 @@
 
             foreach($pronouns as $key) {
                 $tmp = 'profile.pronouns_l.' . $key;
-                $translated_pronouns[] = trans($tmp);
+                $translated_pronouns[] = trans($tmp, [], $lang_t);
             }
         }
 
-        if($member->{"desc_" . app()->getLocale()} != null) {
+        $lang = $lang_t ?? app()->getLocale();
+        if($member->{"desc_" . $lang} != null) {
             // do description
-            $desc = $member->{"desc_" . app()->getLocale()};
+            $desc = $member->{"desc_" . $lang};
             $dec = nl2br(e($desc));
         }
     @endphp

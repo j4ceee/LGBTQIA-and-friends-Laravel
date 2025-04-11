@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +26,27 @@ Route::get('language/{locale}', [LanguageController::class, 'setLanguage'])
  * Admins Only Functions (e.g. delete & create users)
  */
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])
+        ->name('admin');
 
+    // Creation of users
+    Route::get('/users/add', [UserController::class, 'create'])
+        ->name('users.create');
+    Route::post('/admin/users/add', [UserController::class, 'store'])
+        ->name('users.store');
+
+// Editing of users
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])
+        ->where('id', '[0-9]+')
+        ->name('users.edit');
+    Route::patch('/users/{id}', [UserController::class, 'update'])
+        ->where('id', '[0-9]+')
+        ->name('users.update');
+
+// Deletion of users
+    Route::delete('/users/{id}/delete', [UserController::class, 'destroy'])
+        ->where('id', '[0-9]+')
+        ->name('users.destroy');
 });
 
 /**

@@ -7,6 +7,7 @@ return[
 
     'username' => 'Username',
     'email' => 'E-Mail',
+    'role' => 'Rolle',
     'password_field' => 'Passwort',
     'password_confirm' => 'Passwort wiederholen',
     'password_current' => 'Aktuelles Passwort',

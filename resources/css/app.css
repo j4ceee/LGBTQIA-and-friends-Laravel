@@ -785,7 +785,7 @@ footer {
     max-height: 10rem;
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, var(--lgbt-bg) 80%);
     z-index: 3;
-    bottom: 0;
+    bottom: -0.5rem;
 }
 
 .welcome_slide_content {
@@ -949,16 +949,22 @@ footer {
     border-radius: var(--border-radius);
     padding: 2px;
     box-sizing: content-box;
-    animation: gradient 20s linear infinite;
     opacity: 70%;
 }
 
-@keyframes gradient {
-    from {
-        --angle: 305deg;
+@media screen and (min-width: 640px) {
+    .calendar_container:after, .calendar_container:before,
+    .profile_bg:after, .profile_bg:before {
+        animation: gradient 20s linear infinite;
     }
-    to {
-        --angle: -55deg;
+
+    @keyframes gradient {
+        from {
+            --angle: 305deg;
+        }
+        to {
+            --angle: -55deg;
+        }
     }
 }
 
@@ -1525,7 +1531,8 @@ footer {
 .home_slide_3::before {
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--lgbt-bg) 80%);
     z-index: 3;
-    top: 0;
+    top: -0.5rem;
+    bottom: unset;
 }
 
 @property --angle2 {

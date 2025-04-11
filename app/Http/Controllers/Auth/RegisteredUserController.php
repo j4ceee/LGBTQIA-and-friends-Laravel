@@ -37,18 +37,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => ['required', 'string', 'max:255', 'unique:'.User::class.',username'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class.',email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $adminExists = User::where('admin', true)->exists();
 
         if ($adminExists) {
-            // check if the user sending the request is an admin
-            if (!Auth::check() || !Auth::user()->admin) {
-                return redirect(route('login'));
-            }
+            return redirect(route('login'));
         }
 
         $user = User::create([
@@ -61,7 +58,7 @@ class RegisteredUserController extends Controller
         $user->admin = !$adminExists;
         $user->save();
 
-        event(new Registered($user));
+        event(new Registered($user)); // e.g. for email verification, see EventServiceProvider
 
         Auth::login($user);
 
