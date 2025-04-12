@@ -96,7 +96,7 @@ class ProfileController extends Controller
             $file = $request->file('avatar');
             $image = Image::read($file)->resize(300, 300);
 
-            $filename = $file->hashName() . '.webp';
+            $filename = substr($file->hashName(), 0, 30) . '-' . date('Y-m-d-H-i-s') . '.webp';
             $path = 'img/users/';
 
             // Delete old avatar if exists
